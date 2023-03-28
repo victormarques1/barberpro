@@ -1,0 +1,46 @@
+1-- Instalar typescript em desenvolvimento
+yarn add typescript -D
+
+2-- Instalar express e tipagens ts
+ yarn add express
+ yarn add @types/express -D
+
+3-- Criar configurações do typescript
+yarn tsc --init
+
+4-- Rodar servidor e entender typescript
+yarn add ts-node-dev -D
+
+5-- Criar scripts em package.json
+"scripts": {
+    "dev": "ts-node-dev --transpile-only src/server.ts"
+  }
+
+6-- Instalar biblioteca para tratar erros 
+yarn add express-async-errors (utilizar como segundo import)
+
+7-- Instalar o cors para desbloquear para fazer requisições
+yarn add cors
+yarn add @types/cors -D
+
+8-- Criar o banco de dados
+
+9-- Adicionar o prisma
+yarn add prisma
+yarn add @prisma/client
+npx prisma init (criando prisma)
+
+10-- Arrumar o database_url no .env
+
+11-- Criar schema do banco e enviar migrations com
+yarn prisma migrate dev
+
+12-- Adicionando bcryptsjs para fazer criptografia de dados
+yarn add bcryptjs
+yarn add @types/bcriptjs -D
+
+13-- Adicionar tokens JWT
+yarn add jsonwebtoken
+yarn add @types/jsonwebtoken -D
+---- criar jwt secret na pasta .env
+---- mudar strict para false na past tsconfig
