@@ -5,7 +5,6 @@ import { Sidebar } from "../../components/sidebar"
 import { 
   Flex,
   Heading,
-  Text,
   Button,
   Input,
   Select
@@ -70,7 +69,7 @@ export default function New({ haircuts }: NewProps){
         <title>BarberPro - Novo agendamento</title>
       </Head>
       <Sidebar>
-        <Flex direction="column" align="flex-start" justify="flex-start" color="white">
+        <Flex direction="column" align="flex-start" justify="flex-start" color="white" pl="4" pr="4" mt="4">
           <Flex
             direction="row"
             w="100%"
@@ -78,7 +77,7 @@ export default function New({ haircuts }: NewProps){
             justify="flex-start"
           >
             <Heading fontSize="3xl" mt={4} mb={4} mr={4}>
-              Novo corte
+              Novo serviço
             </Heading>
           </Flex>
 
@@ -93,17 +92,18 @@ export default function New({ haircuts }: NewProps){
             bg="barber.400"
           >
             <Input
-              placeholder="Nome do cliente"
+              placeholder="Digite o nome do cliente"
               w="85%"
               mb={3}
               size="lg"
               type="text"
               bg="barber.900"
+              borderColor="#424242"
               value={customer}
               onChange={ (e: ChangeEvent<HTMLInputElement>) => setCustomer(e.target.value) }
             />
 
-            <Select bg="barber.900" mb={3} size="lg" w="85%" onChange={ (e) => handleChangeSelect(e.target.value) }>
+            <Select bg="barber.900" mb={3} size="lg" w="85%" borderColor="#424242" onChange={ (e) => handleChangeSelect(e.target.value) }>
               {haircuts?.map( item => (
                 <option key={item?.id} value={item?.id}>{item?.name}</option>
               ))}
@@ -112,12 +112,13 @@ export default function New({ haircuts }: NewProps){
             <Button
               w="85%"
               size="lg"
+              fontWeight="bold"
               color="gray.900"
               bg="button.cta"
               _hover={{ bg: '#FFb13e' }}
               onClick={handleRegister}
             >
-              Cadastrar
+              Registrar
             </Button>
 
           </Flex>

@@ -134,7 +134,7 @@ export function AuthProvider({ children }: AuthProviderProps){
   async function logoutUser(){
     try{
       destroyCookie(null, '@barber.token', { path: '/' })
-      Router.push('/login')
+      Router.push('/')
       setUser(null);
     }catch(err){
       console.log("ERRO AO SAIR", err)

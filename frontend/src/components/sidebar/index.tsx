@@ -79,8 +79,6 @@ const SidebarContent = ({onClose, ...rest}: SidebarProps) => {
     <Box 
       color="white"
       bg="barber.400"
-      borderRight="1px"
-      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
@@ -158,13 +156,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps ) => {
       px={{ base: 4, md: 24 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue('white', 'gray.900')}
-      borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+      bg="barber.400"
+      
       justifyContent="flex-start"
       {...rest}
     >
       <IconButton
+        borderColor="#585858"
+        color="white"
         variant="outline"
         onClick={onOpen}
         aria-label="open menu"
@@ -172,7 +171,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps ) => {
       />
   
       <Flex flexDirection="row">
-        <Text ml={8} fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+        <Text ml={8} fontSize="2xl" fontFamily="monospace" fontWeight="bold" color="white">
           Barber
         </Text>
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" color="button.cta">

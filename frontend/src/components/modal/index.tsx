@@ -11,7 +11,8 @@ import {
   Flex,
 } from '@chakra-ui/react'
 
-import { FiUser, FiScissors } from 'react-icons/fi'
+import { FiScissors } from 'react-icons/fi'
+import { IoMdPerson } from "react-icons/io";
 import { FaMoneyBillAlt } from 'react-icons/fa'
 import { ScheduleItem } from '../../pages/dashboard'
 
@@ -34,7 +35,7 @@ export function ModalInfo({ isOpen, onOpen, onClose, data, finishService  }:Moda
 
         <ModalBody>
           <Flex align="center" mb={3}>
-            <FiUser size={28} color="#FFB13e" />
+            <IoMdPerson size={28} color="#FFB13e" />
             <Text ml={3} fontSize="2xl" fontWeight="bold" color="white">
               {data?.customer}
             </Text>
@@ -59,10 +60,9 @@ export function ModalInfo({ isOpen, onOpen, onClose, data, finishService  }:Moda
               bg="button.cta"
               _hover={{ bg: '#FFb13e' }}
               color="#FFF"
-              mr={3}
               onClick={ () => finishService() }
             >
-              Finalizar Serviço
+              Finalizar serviço
             </Button>
           </ModalFooter>
 
