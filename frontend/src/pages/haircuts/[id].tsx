@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from 'react'
-import Head from 'next/head';
+import { useState, ChangeEvent } from "react";
+import Head from "next/head";
 import {
   Flex,
   Text,
@@ -8,17 +8,17 @@ import {
   useMediaQuery,
   Input,
   Stack,
-  Switch
-} from '@chakra-ui/react'
+  Switch,
+} from "@chakra-ui/react";
 
-import { Sidebar } from '../../components/sidebar'
-import { FiChevronLeft } from 'react-icons/fi'
-import Link from 'next/link'
+import { Sidebar } from "../../components/sidebar";
+import { FiChevronLeft } from "react-icons/fi";
+import Link from "next/link";
 
-import { canSSRAuth } from '../../utils/canSSRAuth'
-import { setupAPIClient } from '../../services/api'
+import { canSSRAuth } from "../../utils/canSSRAuth";
+import { setupAPIClient } from "../../services/api";
 
-interface HaircutProps{
+interface HaircutProps {
   id: string;
   name: string;
   price: string | number;
@@ -26,75 +26,88 @@ interface HaircutProps{
   user_id: string;
 }
 
-interface SubscriptionProps{
+interface SubscriptionProps {
   id: string;
   status: string;
 }
 
-interface EditHaircutProps{
+interface EditHaircutProps {
   haircut: HaircutProps;
   subscription: SubscriptionProps | null;
 }
 
-export default function EditHaircut({ subscription, haircut }: EditHaircutProps){
-  const [isMobile] = useMediaQuery("(max-width: 500px)")
+export default function EditHaircut({
+  subscription,
+  haircut,
+}: EditHaircutProps) {
+  const [isMobile] = useMediaQuery("(max-width: 500px)");
 
-  const [name, setName] = useState(haircut?.name)
-  const [price, setPrice] = useState(haircut?.price)
-  const [status, setStatus] = useState(haircut?.status)
+  const [name, setName] = useState(haircut?.name);
+  const [price, setPrice] = useState(haircut?.price);
+  const [status, setStatus] = useState(haircut?.status);
 
-  const [disableHaircut, setDisableHaircut] = useState(haircut?.status ? "disabled" : "enabled")
+  const [disableHaircut, setDisableHaircut] = useState(
+    haircut?.status ? "disabled" : "enabled"
+  );
 
-  function handleChangeStatus (e: ChangeEvent<HTMLInputElement>){
-    if(e.target.value === 'disable'){
-      setDisableHaircut('enabled');
+  function handleChangeStatus(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.value === "disable") {
+      setDisableHaircut("enabled");
       setStatus(false);
     } else {
       setDisableHaircut("disabled");
       setStatus(true);
     }
-  } 
+  }
 
-  async function handleUpdate(){
-    if(name === '' || price === ''){
+  async function handleUpdate() {
+    if (name === "" || price === "") {
       return;
     }
 
-    try{
-
-      const apiClient= setupAPIClient();
-      await apiClient.put('/haircut', {
+    try {
+      const apiClient = setupAPIClient();
+      await apiClient.put("/haircut", {
         name: name,
         price: Number(price),
         status: status,
-        haircut_id: haircut?.id
-      })
+        haircut_id: haircut?.id,
+      });
 
-      alert("Corte atualizado com sucesso")
-
-    } catch(err){
-
-    }
+      alert("Corte atualizado com sucesso");
+    } catch (err) {}
   }
 
-  return(
+  return (
     <>
       <Head>
         <title>Editando modelo de corte - BarberPRO</title>
       </Head>
       <Sidebar>
-        <Flex direction="column" alignItems="flex-start" justifyContent="flex-start" color="white">
-
-          <Flex 
+        <Flex
+          direction="column"
+          alignItems="flex-start"
+          justifyContent="flex-start"
+          color="white"
+        >
+          <Flex
             direction={isMobile ? "column" : "row"}
             w="100%"
-            alignItems={isMobile ? "flex-start" : "center" }
+            alignItems={isMobile ? "flex-start" : "center"}
             justifyContent="flex-start"
             mb={isMobile ? 4 : 0}
           >
             <Link href="/haircuts">
-              <Button mr={3} p={4} display="flex" alignItems="center" justifyContent="center">
-                <FiChevronLeft size={24} color="#FFF"/>
+              <Button
+                mr={3}
+                p={4}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                bg="#2D3748"
+                size="sm"
+              >
+                <FiChevronLeft size={24} color="#FFF" />
                 Voltar
               </Button>
             </Link>
@@ -104,8 +117,20 @@ export default function EditHaircut({ subscription, haircut }: EditHaircutProps)
             </Heading>
           </Flex>
 
-          <Flex mt={4} maxW="700px" pt={8} pb={8} w="100%" bg="barber.400" direction="column" align="center" justify="center">
-            <Heading fontSize={isMobile ? "22px" : "3xl"} mb={4}>Editar corte</Heading>
+          <Flex
+            mt={4}
+            maxW="700px"
+            pt={8}
+            pb={8}
+            w="100%"
+            bg="barber.400"
+            direction="column"
+            align="center"
+            justify="center"
+          >
+            <Heading fontSize={isMobile ? "22px" : "3xl"} mb={4}>
+              Editar modelo
+            </Heading>
 
             <Flex w="85%" direction="column">
               <Input
@@ -136,8 +161,10 @@ export default function EditHaircut({ subscription, haircut }: EditHaircutProps)
                   size="lg"
                   colorScheme="red"
                   value={disableHaircut}
-                  isChecked={disableHaircut === 'disabled' ? false : true}
-                  onChange={ (e: ChangeEvent<HTMLInputElement>) => handleChangeStatus(e)}
+                  isChecked={disableHaircut === "disabled" ? false : true}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleChangeStatus(e)
+                  }
                 />
               </Stack>
 
@@ -147,70 +174,63 @@ export default function EditHaircut({ subscription, haircut }: EditHaircutProps)
                 bg="button.cta"
                 color="gray.900"
                 _hover={{ bg: "#FFB13e" }}
-                disabled={subscription?.status !== 'active'}
+                disabled={subscription?.status !== "active"}
                 onClick={handleUpdate}
               >
                 Salvar
               </Button>
 
-              { subscription?.status !== 'active' && (
+              {subscription?.status !== "active" && (
                 <Flex direction="row" align="center" justify="center">
                   <Link href="/planos">
-                    <Text cursor="pointer" fontWeight="bold" mr={1} color="#31fb6a">
+                    <Text
+                      cursor="pointer"
+                      fontWeight="bold"
+                      mr={1}
+                      color="#31fb6a"
+                    >
                       Seja premium
                     </Text>
                   </Link>
-                  <Text>
-                    e tenha todos acessos liberados.
-                  </Text>
+                  <Text>e tenha todos acessos liberados.</Text>
                 </Flex>
               )}
-
-
             </Flex>
-
           </Flex>
-
-
         </Flex>
       </Sidebar>
     </>
-  )
+  );
 }
-
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
   const { id } = ctx.params;
 
-  try{
+  try {
     const apiClient = setupAPIClient(ctx);
 
-    const check = await apiClient.get('/haircut/check');
+    const check = await apiClient.get("/haircut/check");
 
-    const response = await apiClient.get('/haircut/detail', {
-      params:{
+    const response = await apiClient.get("/haircut/detail", {
+      params: {
         haircut_id: id,
-      }
-    })
+      },
+    });
 
-    
-    return{
-      props:{
+    return {
+      props: {
         haircut: response.data,
-        subscription: check.data?.subscriptions
-      }
-    }
-
-
-  }catch(err){
+        subscription: check.data?.subscriptions,
+      },
+    };
+  } catch (err) {
     console.log(err);
 
-    return{
-      redirect:{
-        destination: '/haircuts',
+    return {
+      redirect: {
+        destination: "/haircuts",
         permanent: false,
-      }
-    }
+      },
+    };
   }
-
-})
+});
